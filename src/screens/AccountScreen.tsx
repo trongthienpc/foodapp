@@ -19,7 +19,7 @@ import Feather from "react-native-vector-icons/Feather";
 import Separator from "../components/Separator";
 import ToggleButton from "../components/ToggleButton";
 
-const AccountScreen = () => {
+const AccountScreen = ({ navigation }: any) => {
   const dispatch = useAppDispatch();
 
   const logout = () => {
@@ -29,160 +29,159 @@ const AccountScreen = () => {
       setAppToken("");
       setUserData(null);
     });
-    return (
-      <View style={styles.container}>
-        <StatusBar
-          barStyle="light-content"
-          backgroundColor={Colors.DEFAULT_GREEN}
-          translucent
+  };
+  return (
+    <View style={styles.container}>
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor={Colors.DEFAULT_GREEN}
+        translucent
+      />
+      <Separator height={StatusBar.currentHeight} />
+      <View style={styles.backgroundCurvedContainer} />
+      <View style={styles.headerContainer}>
+        <Ionicons
+          name="chevron-back-outline"
+          size={20}
+          color={Colors.DEFAULT_WHITE}
+          onPress={() => navigation.goBack()}
         />
-        <Separator height={StatusBar.currentHeight} />
-        <View style={styles.backgroundCurvedContainer} />
-        <View style={styles.headerContainer}>
-          <Ionicons
-            name="chevron-back-outline"
-            size={20}
-            color={Colors.DEFAULT_WHITE}
-            // onPress={() => navigation.goBack()}
-          />
-          <Text style={styles.headerText}>Account</Text>
-          <View>
-            <Feather name="bell" size={20} color={Colors.DEFAULT_WHITE} />
-            <View style={styles.alertBadge}>
-              <Text style={styles.alertBadgeText}>12</Text>
-            </View>
-          </View>
-        </View>
-        <View style={styles.profileHeaderContainer}>
-          <View style={styles.profileImageContainer}>
-            <Image style={styles.profileImage} source={Images.AVATAR} />
-          </View>
-          <View style={styles.profileTextContainer}>
-            <Text style={styles.nameText}>Ameen Farook</Text>
-            <Text style={styles.emailText}>ameeen.faroook@gmail.com</Text>
-          </View>
-        </View>
-        <View style={styles.menuContainer}>
-          <TouchableOpacity style={styles.menuItem} activeOpacity={0.8}>
-            <View style={styles.menuIcon}>
-              <MaterialCommunityIcons
-                name="truck-fast-outline"
-                size={18}
-                color={Colors.DEFAULT_GREEN}
-              />
-            </View>
-            <Text style={styles.menuText}>My All {"\n"}Orders</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.menuItem} activeOpacity={0.8}>
-            <View
-              style={{ ...styles.menuIcon, backgroundColor: Colors.LIGHT_RED }}
-            >
-              <MaterialCommunityIcons
-                name="gift-outline"
-                size={18}
-                color={Colors.SECONDARY_RED}
-              />
-            </View>
-            <Text style={styles.menuText}>Offers {"&\n"} Promos</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.menuItem} activeOpacity={0.8}>
-            <View
-              style={{
-                ...styles.menuIcon,
-                backgroundColor: Colors.LIGHT_YELLOW,
-              }}
-            >
-              <Ionicons
-                name="location-outline"
-                size={18}
-                color={Colors.DEFAULT_YELLOW}
-              />
-            </View>
-            <Text style={styles.menuText}>Delivery Addresses</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.mainContainer}>
-          <Text style={styles.sectionHeaderText}>My Account</Text>
-          <TouchableOpacity style={styles.sectionContainer} activeOpacity={0.8}>
-            <View style={styles.sectionTextContainer}>
-              <Ionicons
-                name="person-outline"
-                size={18}
-                color={Colors.DEFAULT_GREEN}
-              />
-              <Text style={styles.sectionText}>Manage Profile</Text>
-            </View>
-            <Feather
-              name="chevron-right"
-              color={Colors.INACTIVE_GREY}
-              size={20}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.sectionContainer} activeOpacity={0.8}>
-            <View style={styles.sectionTextContainer}>
-              <Ionicons
-                name="card-outline"
-                size={18}
-                color={Colors.DEFAULT_GREEN}
-              />
-              <Text style={styles.sectionText}>Payment</Text>
-            </View>
-            <Feather
-              name="chevron-right"
-              color={Colors.INACTIVE_GREY}
-              size={20}
-            />
-          </TouchableOpacity>
-
-          <Text style={styles.sectionHeaderText}>Notification</Text>
-          <View style={styles.sectionContainer}>
-            <View style={styles.sectionTextContainer}>
-              <Feather name="bell" size={18} color={Colors.DEFAULT_GREEN} />
-              <Text style={styles.sectionText}>Notification</Text>
-            </View>
-            <ToggleButton size={0.5} />
-          </View>
-          <View style={styles.sectionContainer}>
-            <View style={styles.sectionTextContainer}>
-              <Feather name="bell" size={18} color={Colors.DEFAULT_GREEN} />
-              <Text style={styles.sectionText}>
-                Promos & Offers Notification
-              </Text>
-            </View>
-            <ToggleButton size={0.5} />
-          </View>
-
-          <Text style={styles.sectionHeaderText}>More</Text>
-          <View style={styles.sectionContainer}>
-            <View style={styles.sectionTextContainer}>
-              <Ionicons
-                name="ios-color-palette-outline"
-                size={18}
-                color={Colors.DEFAULT_GREEN}
-              />
-              <Text style={styles.sectionText}>Dark Mode</Text>
-            </View>
-            <ToggleButton size={0.5} />
-          </View>
-          <View style={styles.sectionContainer}>
-            <TouchableOpacity
-              style={styles.sectionTextContainer}
-              activeOpacity={0.8}
-              onPress={() => logout()}
-            >
-              <MaterialCommunityIcons
-                name="logout"
-                size={18}
-                color={Colors.DEFAULT_GREEN}
-              />
-              <Text style={styles.sectionText}>Logout</Text>
-            </TouchableOpacity>
+        <Text style={styles.headerText}>Account</Text>
+        <View>
+          <Feather name="bell" size={20} color={Colors.DEFAULT_WHITE} />
+          <View style={styles.alertBadge}>
+            <Text style={styles.alertBadgeText}>12</Text>
           </View>
         </View>
       </View>
-    );
-  };
+      <View style={styles.profileHeaderContainer}>
+        <View style={styles.profileImageContainer}>
+          <Image style={styles.profileImage} source={Images.AVATAR} />
+        </View>
+        <View style={styles.profileTextContainer}>
+          <Text style={styles.nameText}>Ameen Farook</Text>
+          <Text style={styles.emailText}>ameeen.faroook@gmail.com</Text>
+        </View>
+      </View>
+      <View style={styles.menuContainer}>
+        <TouchableOpacity style={styles.menuItem} activeOpacity={0.8}>
+          <View style={styles.menuIcon}>
+            <MaterialCommunityIcons
+              name="truck-fast-outline"
+              size={18}
+              color={Colors.DEFAULT_GREEN}
+            />
+          </View>
+          <Text style={styles.menuText}>My All {"\n"}Orders</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuItem} activeOpacity={0.8}>
+          <View
+            style={{ ...styles.menuIcon, backgroundColor: Colors.LIGHT_RED }}
+          >
+            <MaterialCommunityIcons
+              name="gift-outline"
+              size={18}
+              color={Colors.SECONDARY_RED}
+            />
+          </View>
+          <Text style={styles.menuText}>Offers {"&\n"} Promos</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.menuItem} activeOpacity={0.8}>
+          <View
+            style={{
+              ...styles.menuIcon,
+              backgroundColor: Colors.LIGHT_YELLOW,
+            }}
+          >
+            <Ionicons
+              name="location-outline"
+              size={18}
+              color={Colors.DEFAULT_YELLOW}
+            />
+          </View>
+          <Text style={styles.menuText}>Delivery Addresses</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.mainContainer}>
+        <Text style={styles.sectionHeaderText}>My Account</Text>
+        <TouchableOpacity style={styles.sectionContainer} activeOpacity={0.8}>
+          <View style={styles.sectionTextContainer}>
+            <Ionicons
+              name="person-outline"
+              size={18}
+              color={Colors.DEFAULT_GREEN}
+            />
+            <Text style={styles.sectionText}>Manage Profile</Text>
+          </View>
+          <Feather
+            name="chevron-right"
+            color={Colors.INACTIVE_GREY}
+            size={20}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.sectionContainer} activeOpacity={0.8}>
+          <View style={styles.sectionTextContainer}>
+            <Ionicons
+              name="card-outline"
+              size={18}
+              color={Colors.DEFAULT_GREEN}
+            />
+            <Text style={styles.sectionText}>Payment</Text>
+          </View>
+          <Feather
+            name="chevron-right"
+            color={Colors.INACTIVE_GREY}
+            size={20}
+          />
+        </TouchableOpacity>
+
+        <Text style={styles.sectionHeaderText}>Notification</Text>
+        <View style={styles.sectionContainer}>
+          <View style={styles.sectionTextContainer}>
+            <Feather name="bell" size={18} color={Colors.DEFAULT_GREEN} />
+            <Text style={styles.sectionText}>Notification</Text>
+          </View>
+          <ToggleButton size={0.5} />
+        </View>
+        <View style={styles.sectionContainer}>
+          <View style={styles.sectionTextContainer}>
+            <Feather name="bell" size={18} color={Colors.DEFAULT_GREEN} />
+            <Text style={styles.sectionText}>Promos & Offers Notification</Text>
+          </View>
+          <ToggleButton size={0.5} />
+        </View>
+
+        <Text style={styles.sectionHeaderText}>More</Text>
+        <View style={styles.sectionContainer}>
+          <View style={styles.sectionTextContainer}>
+            <Ionicons
+              name="ios-color-palette-outline"
+              size={18}
+              color={Colors.DEFAULT_GREEN}
+            />
+            <Text style={styles.sectionText}>Dark Mode</Text>
+          </View>
+          <ToggleButton size={0.5} />
+        </View>
+        <View style={styles.sectionContainer}>
+          <TouchableOpacity
+            style={styles.sectionTextContainer}
+            activeOpacity={0.8}
+            onPress={() => logout()}
+          >
+            <MaterialCommunityIcons
+              name="logout"
+              size={18}
+              color={Colors.DEFAULT_GREEN}
+            />
+            <Text style={styles.sectionText}>Logout</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </View>
+  );
 };
+
 export default AccountScreen;
 
 const styles = StyleSheet.create({
