@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import GeneralReducer from "../old-store/reducers/GeneralReducer";
 
 const generalSlice = createSlice({
   name: "general",
@@ -18,7 +19,7 @@ const generalSlice = createSlice({
       state.token = action.payload;
     },
     // TODO: set first time use state
-    setFirstTimeUser: (state, action) => {
+    setFirstTimeUse: (state, action) => {
       state.isFirstTimeUse = action.payload;
     },
     // TODO: set user data
@@ -27,5 +28,6 @@ const generalSlice = createSlice({
     },
   },
 });
-
+export const { setAppLoading, setAppToken, setFirstTimeUse, setUserData } =
+  generalSlice.actions;
 export default generalSlice.reducer;

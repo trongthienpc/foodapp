@@ -1,15 +1,15 @@
 import axios from "axios";
 import URL from "../constants/URL";
-import { getToken } from "../store/Store";
+// import { getToken } from "../old-store/Store";
 import { authHeader, returnObject } from "../utils/General";
 //get user data
-const getUserData = async () => {
+const getUserData = async (token: string) => {
   console.log("UserService: getUserData");
 
   try {
     let userResponse = await axios.get(
       `${URL.BACKEND_API.BASE_API_URL}${URL.BACKEND_API.USER}/get-user`,
-      { headers: authHeader(getToken()) }
+      { headers: authHeader(token) }
     );
 
     if (userResponse.status === 200) {

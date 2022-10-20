@@ -6,6 +6,6 @@ const Store = configureStore({
   reducer: Reducers,
 });
 
-const getToken = () => Store.getState().generalState?.token;
+// const getToken = () => Store.getState().generalState?.token;
 export type AppDispatch = typeof Store.dispatch;
-export { Store, getToken };
+export { Store };

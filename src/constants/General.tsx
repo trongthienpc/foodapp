@@ -18,3 +18,5 @@ const WELCOME_CONTENT = [
       "We make food ordering fast, easy and free. No matter you paid online or cash.",
   },
 ];
+
+export default { WELCOME_CONTENT };
