@@ -1,33 +1,44 @@
 import axios from "axios";
 import { URL } from "../constants";
+import { getToken } from "../store/store";
 import { authHeader } from "../utils/General";
 
 // get all restaurants
 const getRestaurants = async () => {
   console.log(`RestaurantsService | getRestaurants`);
-  try {
-    let restaurantResponse = await axios.get(
-      `${URL.BACKEND_API.BASE_API_URL}${URL.BACKEND_API.RESTAURANT}`,
-      {
-        headers: authHeader(""),
+  const token = getToken();
+  if (token) {
+    try {
+      let restaurantResponse = await axios.get(
+        // `${URL.BACKEND_API.BASE_API_URL}${URL.BACKEND_API.RESTAURANT}`,
+        `http://192.168.1.8:8080/api/restaurant`,
+        {
+          headers: authHeader(token),
+        }
+      );
+
+      if (restaurantResponse?.status === 200) {
+        return {
+          status: true,
+          message: `Restaurant data fetched`,
+          data: restaurantResponse?.data?.data,
+        };
+      } else {
+        return {
+          status: false,
+          message: `Restaurant data not found`,
+        };
       }
-    );
-    if (restaurantResponse?.status === 200) {
-      return {
-        status: true,
-        message: `Restaurant data fetched`,
-        data: restaurantResponse?.data?.data,
-      };
-    } else {
+    } catch (error) {
       return {
         status: false,
         message: `Restaurant data not found`,
       };
     }
-  } catch (error) {
+  } else {
     return {
       status: false,
-      message: `Restaurant data not found`,
+      message: `Token not found`,
     };
   }
 };

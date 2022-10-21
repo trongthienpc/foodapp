@@ -14,7 +14,7 @@ interface UserRegister extends User {
 
 // authRequest
 const AuthRequest = axios.create({
-  baseURL: `http://192.168.4.89:8080/api`,
+  baseURL: URL.BACKEND_API.BASE_API_URL,
 });
 
 // register

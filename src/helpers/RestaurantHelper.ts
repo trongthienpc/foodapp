@@ -9,16 +9,15 @@ import {
   getRestaurantStarted,
   getRestaurantSuccess,
 } from "../store/RestaurantSlice";
-import { getToken } from "../store/store";
-import { authHeader } from "../utils/General";
 
 // get all restaurants
-export const getRestaurantsHelper = async ({ dispatch }: any) => {
+export const getRestaurantsHelper = async (dispatch: any) => {
   console.log(`RestaurantHelper.getRestaurants`);
   dispatch(getRestaurantsStarted);
   try {
     // call restaurant service
     const response = await RestaurantService.getRestaurants();
+    console.log(response.data.length);
     if (response.status) {
       dispatch(getRestaurantsSuccess(response.data));
     } else {

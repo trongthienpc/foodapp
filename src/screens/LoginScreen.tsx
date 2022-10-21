@@ -35,11 +35,8 @@ const LoginScreen = ({ navigation }: any) => {
       password,
     };
     AuthenticationService.login(user).then((response) => {
-      console.log(`loginScreen | login:`);
-      console.log(response);
       setIsLoading(false);
       if (response?.status) {
-        console.log(response?.status);
         StorageService.setToken(response?.data).then(() => {
           // dispatch(GeneralAction.setToken(response?.data));
           dispatch(setAppToken(response?.data));

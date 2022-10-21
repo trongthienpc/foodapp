@@ -19,6 +19,8 @@ import RestaurantMediumCard from "../components/RestaurantMediumCard";
 import RestaurantCard from "../components/RestaurantCard";
 import CategoryMenuItem from "../components/CategoryMenuItem";
 import { TextInput } from "react-native-gesture-handler";
+import { getRestaurantsHelper } from "../helpers/RestaurantHelper";
+import { useAppDispatch, useAppSelector } from "../store/Hooks";
 
 const sortStyle = (isActive: boolean) =>
   isActive
@@ -26,17 +28,16 @@ const sortStyle = (isActive: boolean) =>
     : { ...styles.sortListItem, borderBottomColor: Colors.DEFAULT_WHITE };
 
 const HomeScreen = ({ navigation }: any) => {
+  const restaurantSelector = useAppSelector((state) => state.restaurant);
   const [activeCategory, setActiveCategory] = useState();
-  const [restaurants, setRestaurants] = useState([]);
+  const [restaurants, setRestaurants] = useState<any>(
+    restaurantSelector.restaurants
+  );
   const [activeSortItem, setActiveSortItem] = useState("recent");
-
+  const dispatch = useAppDispatch();
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
-      RestaurantService.getRestaurants().then((response) => {
-        if (response?.status) {
-          setRestaurants(response?.data);
-        }
-      });
+      getRestaurantsHelper(dispatch);
     });
     return unsubscribe;
   }, []);
