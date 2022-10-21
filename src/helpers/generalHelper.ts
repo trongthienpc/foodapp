@@ -1,11 +1,11 @@
-import { useAppDispatch } from "./../store/hooks";
+import { useAppDispatch } from "../store/Hooks";
 import { AuthenticationService, StorageService } from "../services";
 import {
   setAppLoading,
   setAppToken,
   setFirstTimeUse,
   setUserData,
-} from "../store/generalSlice";
+} from "../store/GeneralSlice";
 import UserService from "../services/UserService";
 
 export const FirstTimeUse = (dispatch: any) => {

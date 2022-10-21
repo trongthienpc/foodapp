@@ -7,9 +7,9 @@ import {
   Image,
 } from "react-native";
 import React from "react";
-import { useAppDispatch } from "../store/hooks";
+import { useAppDispatch } from "../store/Hooks";
 import { StorageService } from "../services";
-import { setAppToken, setUserData } from "../store/generalSlice";
+import { setAppToken, setUserData } from "../store/GeneralSlice";
 import { Colors, Images } from "../constants";
 import { Display } from "../utils";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -23,11 +23,12 @@ const AccountScreen = ({ navigation }: any) => {
   const dispatch = useAppDispatch();
 
   const logout = () => {
+    console.log(`accountScreen.logout`);
     StorageService.setToken("").then(() => {
       // dispatch(GeneralAction.setToken(''));
       // dispatch(GeneralAction.setUserData(null));
-      setAppToken("");
-      setUserData(null);
+      dispatch(setAppToken(""));
+      dispatch(setUserData(null));
     });
   };
   return (

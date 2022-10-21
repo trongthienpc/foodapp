@@ -3,27 +3,27 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
-import SignUp from "../screens/signup";
-import { FirstTimeUse, GetAppToken } from "../helpers/generalHelper";
+import { useAppDispatch, useAppSelector } from "../store/Hooks";
+import { FirstTimeUse, GetAppToken } from "../helpers/GeneralHelper";
 import HomeTabs from "./BottomTabs";
-import Loading from "../screens/loading";
-import SplashScreen from "../screens/SplashScreen";
-import WelcomeScreen from "../screens/welcome";
-import RegisterPhoneScreen from "../screens/RegisterPhoneScreen";
-import VerificationScreen from "../screens/VerificationScreen";
-import HomeScreen from "../screens/HomeScreen";
+import {
+  ForgotPasswordScreen,
+  LoginScreen,
+  RegisterPhoneScreen,
+  SignUpScreen,
+  SplashScreen,
+  VerificationScreen,
+  WelcomeScreen,
+} from "../screens";
 
 const stack = createStackNavigator();
 
 const Navigators = () => {
-  const { isAppLoading, token, isFirstTimeUse } = useAppSelector(
+  const { isAppLoading, token, isFirstTimeUse, userData } = useAppSelector(
     (state) => state.general
   );
-  const generalSelector = useAppSelector((state) => state.general);
-  console.log(generalSelector);
-  console.log();
-  console.log(isAppLoading);
+  console.log(["token :", token]);
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -33,17 +33,28 @@ const Navigators = () => {
   return (
     <NavigationContainer>
       <stack.Navigator screenOptions={{ headerShown: false }}>
-        {/* {isAppLoading ? (
+        {isAppLoading ? (
           <stack.Screen name="loading" component={SplashScreen} />
-        ) : !token || token === null || token.length === 0 ? (
-          <stack.Screen name="SignUp" component={SignUp} />
+        ) : !token || token === null || token === "" ? (
+          <>
+            {isFirstTimeUse && (
+              <stack.Screen name="Welcome" component={WelcomeScreen} />
+            )}
+            <stack.Screen name="Login" component={LoginScreen} />
+            <stack.Screen name="SignUp" component={SignUpScreen} />
+            <stack.Screen
+              name="ForgotPassword"
+              component={ForgotPasswordScreen}
+            />
+            <stack.Screen
+              name="RegisterPhone"
+              component={RegisterPhoneScreen}
+            />
+            <stack.Screen name="Verification" component={VerificationScreen} />
+          </>
         ) : (
-          <stack.Screen name="Home" component={Home} />
-        )} */}
-        <stack.Screen name="Welcome" component={WelcomeScreen} />
-        <stack.Screen name="RegisterPhone" component={RegisterPhoneScreen} />
-        <stack.Screen name="Verification" component={VerificationScreen} />
-        <stack.Screen name="HomeTabs" component={HomeTabs} />
+          <stack.Screen name="HomeTabs" component={HomeTabs} />
+        )}
       </stack.Navigator>
     </NavigationContainer>
   );

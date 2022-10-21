@@ -5,6 +5,7 @@ import { Colors } from "../constants";
 import BookmarkCard from "../components/BookmarkCard";
 import Separator from "../components/Separator";
 import { Display } from "../utils";
+import { useAppSelector } from "../store/Hooks";
 
 const ListItemSeparator = () => (
   <View
@@ -18,7 +19,7 @@ const ListItemSeparator = () => (
 );
 
 const BookmarkScreen = ({ navigation }: any) => {
-  const bookmarks: any[] = [];
+  const bookmarks = useAppSelector((state) => state.bookmark.bookmarks);
   return (
     <View style={styles.container}>
       <StatusBar

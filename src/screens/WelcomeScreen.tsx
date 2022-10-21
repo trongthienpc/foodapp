@@ -9,11 +9,11 @@ import {
 import React, { useRef, useState } from "react";
 import { Colors, General } from "../constants";
 import { Display } from "../utils";
-import { useAppDispatch } from "../store/hooks";
+import { useAppDispatch } from "../store/Hooks";
 import { StorageService } from "../services";
 import Separator from "../components/Separator";
 import WelcomeCard from "../components/WelcomeCard";
-import { setFirstTimeUse } from "../store/generalSlice";
+import { setFirstTimeUse } from "../store/GeneralSlice";
 
 const pageStyle = (isActive: any) =>
   isActive
@@ -53,7 +53,7 @@ const WelcomeScreen = ({ navigation }: any) => {
     StorageService.setIsFirstTimeUse().then(() => {
       setFirstTimeUse(false);
     });
-    navigation.navigate("RegisterPhone");
+    navigation.navigate("Login");
   };
 
   return (

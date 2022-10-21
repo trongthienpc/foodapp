@@ -16,9 +16,9 @@ const STATIC_IMAGE = {
 
 const BACKEND_API = {
   BASE_API_URL: `${BACKEND_BASE_URL}/api`,
-  REGISTER: "/user/register",
-  LOGIN: "/user/login",
-  USER_EXIST: "/user/user-exist",
+  REGISTER: "/register",
+  LOGIN: "/login",
+  USER_EXIST: "/user-exist",
   USER: "/user",
   REFRESH_TOKEN: "/refresh-token",
   RESTAURANT: "/restaurant",

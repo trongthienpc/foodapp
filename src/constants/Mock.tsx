@@ -7,4 +7,4 @@ const CATEGORIES = [
   { name: "Noodles", logo: "NOODLES" },
 ];
 
-export default CATEGORIES;
+export default { CATEGORIES };

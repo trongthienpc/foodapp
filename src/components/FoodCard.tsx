@@ -4,7 +4,7 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import Display from "../utils/Display";
 import { Colors, URL } from "../constants";
 import StaticImageService from "../services/StaticImageService";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { useAppDispatch, useAppSelector } from "../store/Hooks";
 
 const FoodCard = ({
   id,

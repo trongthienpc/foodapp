@@ -16,6 +16,7 @@ const generalSlice = createSlice({
     },
     // TODO: set token state
     setAppToken: (state, action) => {
+      console.log(`generalSlice.setAppToken: ` + state.token);
       state.token = action.payload;
     },
     // TODO: set first time use state
@@ -25,6 +26,11 @@ const generalSlice = createSlice({
     // TODO: set user data
     setUserData: (state, action) => {
       state.userData = action.payload;
+    },
+    // TODO: reset user data
+    resetUserData: (state) => {
+      state.userData = {};
+      state.token = "";
     },
   },
 });

@@ -1,6 +1,7 @@
 import { Provider } from "react-redux";
 import Navigators from "./src/navigators";
-import { store } from "./src/store/store";
+import { persist, store } from "./src/store/store";
+import { PersistGate } from "redux-persist/integration/react";
 import {
   useFonts,
   Poppins_100Thin,
@@ -47,7 +48,9 @@ export default function App() {
   if (fontsLoaded) {
     return (
       <Provider store={store}>
-        <Navigators />
+        <PersistGate persistor={persist} loading={null}>
+          <Navigators />
+        </PersistGate>
       </Provider>
     );
   }

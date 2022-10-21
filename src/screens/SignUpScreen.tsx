@@ -9,7 +9,7 @@ import Separator from "../components/Separator";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import LottieView from "lottie-react-native";
 import { Display } from "../utils";
-import { setAppToken } from "../store/generalSlice";
+import { setAppToken } from "../store/GeneralSlice";
 
 // input style
 const inputStyle = (state: string) => {
