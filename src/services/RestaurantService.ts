@@ -10,8 +10,8 @@ const getRestaurants = async () => {
   if (token) {
     try {
       let restaurantResponse = await axios.get(
-        // `${URL.BACKEND_API.BASE_API_URL}${URL.BACKEND_API.RESTAURANT}`,
-        `http://192.168.1.8:8080/api/restaurant`,
+        `${URL.BACKEND_API.BASE_API_URL}${URL.BACKEND_API.RESTAURANT}`,
+        // `http://192.168.4.89:8080/api/restaurant`,
         {
           headers: authHeader(token),
         }
@@ -46,29 +46,38 @@ const getRestaurants = async () => {
 // get a restaurant
 const getOneRestaurantById = async (restaurantId: any) => {
   console.log(`RestaurantsService | getOneRestaurantById`);
-  try {
-    let restaurantResponse = await axios.get(
-      `${URL.BACKEND_API.BASE_API_URL}${URL.BACKEND_API.RESTAURANT}/${restaurantId}`,
-      {
-        headers: authHeader(""),
+  const token = getToken();
+  if (token) {
+    try {
+      let restaurantResponse = await axios.get(
+        `${URL.BACKEND_API.BASE_API_URL}${URL.BACKEND_API.RESTAURANT}/${restaurantId}`,
+        {
+          headers: authHeader(token),
+        }
+      );
+      // console.log(restaurantResponse.data);
+      if (restaurantResponse?.status === 200) {
+        return {
+          status: true,
+          message: `Restaurant data fetched`,
+          data: restaurantResponse?.data?.data,
+        };
+      } else {
+        return {
+          status: false,
+          message: `Restaurant data not found`,
+        };
       }
-    );
-    if (restaurantResponse?.status === 200) {
-      return {
-        status: true,
-        message: `Restaurant data fetched`,
-        data: restaurantResponse?.data?.data,
-      };
-    } else {
+    } catch (error) {
       return {
         status: false,
         message: `Restaurant data not found`,
       };
     }
-  } catch (error) {
+  } else {
     return {
       status: false,
-      message: `Restaurant data not found`,
+      message: `Token not found`,
     };
   }
 };

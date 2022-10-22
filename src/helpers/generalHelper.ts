@@ -8,7 +8,7 @@ import {
 } from "../store/GeneralSlice";
 import UserService from "../services/UserService";
 
-export const FirstTimeUse = (dispatch: any) => {
+export const FirstTimeUse = ({ dispatch }: any) => {
   StorageService.getFirstTimeUse().then((isFirstTimeUse) => {
     console.log(isFirstTimeUse);
     if (isFirstTimeUse) dispatch(setFirstTimeUse(false));
@@ -16,10 +16,11 @@ export const FirstTimeUse = (dispatch: any) => {
   });
 };
 
-export const GetAppToken = (dispatch: any) => {
+export const GetAppToken = ({ dispatch }: any) => {
   StorageService.getToken().then((token) => {
     if (token) {
       dispatch(setAppToken(token));
+      console.log(`generalHelper.getAppToken: ${token}`);
       UserService.getUserData(token).then((userResponse) => {
         if (userResponse.status) {
           dispatch(setUserData(userResponse.data));

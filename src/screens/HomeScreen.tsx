@@ -12,15 +12,16 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Feather from "react-native-vector-icons/Feather";
 import { Colors, Mock } from "../constants";
-import RestaurantService from "../services/RestaurantService";
 import { Display } from "../utils";
-import Separator from "../components/Separator";
-import RestaurantMediumCard from "../components/RestaurantMediumCard";
-import RestaurantCard from "../components/RestaurantCard";
-import CategoryMenuItem from "../components/CategoryMenuItem";
 import { TextInput } from "react-native-gesture-handler";
 import { getRestaurantsHelper } from "../helpers/RestaurantHelper";
 import { useAppDispatch, useAppSelector } from "../store/Hooks";
+import {
+  CategoryMenuItem,
+  RestaurantCard,
+  RestaurantMediumCard,
+  Separator,
+} from "../components";
 
 const sortStyle = (isActive: boolean) =>
   isActive

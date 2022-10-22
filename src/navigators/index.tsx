@@ -15,6 +15,7 @@ import {
   VerificationScreen,
   WelcomeScreen,
 } from "../screens";
+import RestaurantScreen from "../screens/RestaurantScreen";
 
 const stack = createStackNavigator();
 
@@ -27,8 +28,8 @@ const Navigators = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    FirstTimeUse(dispatch);
-    GetAppToken(dispatch);
+    FirstTimeUse({ dispatch });
+    GetAppToken({ dispatch });
   }, []);
   return (
     <NavigationContainer>
@@ -53,7 +54,10 @@ const Navigators = () => {
             <stack.Screen name="Verification" component={VerificationScreen} />
           </>
         ) : (
-          <stack.Screen name="HomeTabs" component={HomeTabs} />
+          <>
+            <stack.Screen name="HomeTabs" component={HomeTabs} />
+            <stack.Screen name="Restaurant" component={RestaurantScreen} />
+          </>
         )}
       </stack.Navigator>
     </NavigationContainer>

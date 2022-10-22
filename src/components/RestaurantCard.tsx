@@ -2,9 +2,13 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { useAppDispatch } from "../store/Hooks";
+import { useAppDispatch, useAppSelector } from "../store/Hooks";
 import { Colors } from "../constants";
 import StaticImageService from "../services/StaticImageService";
+import {
+  addBookmarkHelper,
+  removeBookmarkHelper,
+} from "../helpers/BookmarkHelper";
 
 const RestaurantCard = ({
   id,
@@ -24,9 +28,15 @@ const RestaurantCard = ({
   navigate: any;
 }) => {
   const dispatch = useAppDispatch();
-  const isBookmarked = false;
-  const addBookmark = () => {};
-  const removeBookmark = () => {};
+  const isBookmarked = useAppSelector((state) =>
+    state.bookmark.bookmarks?.filter((item) => item?.restaurantId?.length > 0)
+  );
+  const addBookmark = () => {
+    addBookmarkHelper({ dispatch, id });
+  };
+  const removeBookmark = () => {
+    removeBookmarkHelper({ dispatch, id });
+  };
 
   return (
     <TouchableOpacity
